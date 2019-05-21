@@ -34,9 +34,16 @@ public class Djikstra {
         time[src] = 0;
 
         while (settled.size() != V) {
-            int u = pq.remove().node;
+            
+            int u ;
+            if(!pq.isEmpty()){
+               u = pq.remove().node;
+            
             settled.add(u);
-            neighbours(u);
+            neighbours(u);}
+            else
+                System.out.println("There is no path!");
+                break;
         }
     }
 
@@ -104,9 +111,13 @@ public class Djikstra {
             source = UserInput.nextInt();
             destination = UserInput.nextInt();
             test.calculate(adj, source);
-            System.out.print("The shortest path from node ");
+            
+            if(test.distance[destination]!= Integer.MAX_VALUE && test.time[destination] != Integer.MAX_VALUE){
+                System.out.print("The shortest path from node ");
             System.out.println(source + " to " + destination + " is "
-                    + test.distance[destination] + ", " + test.time[destination]);
+                    + test.distance[destination] + ", " + test.time[destination]);}
+            else
+                System.out.println("There is no path!");
         }
         
         
