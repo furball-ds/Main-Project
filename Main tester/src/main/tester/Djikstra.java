@@ -36,14 +36,17 @@ public class Djikstra {
         while (settled.size() != V) {
             
             int u ;
-            if(!pq.isEmpty()){
-               u = pq.remove().node;
+            //if(!pq.isEmpty())
+             if(pq.peek()!= null)
+           {
+           
+            u = pq.remove().node;
             
             settled.add(u);
             neighbours(u);}
-            else
-                System.out.println("There is no path!");
-                break;
+             else{
+             //{System.out.println("There is no path!");
+              break;}
         }
     }
 
@@ -63,10 +66,13 @@ public class Djikstra {
                 newTime = time[u] + edgeTime;
                 if (newTime < time[v.node]) {
                     time[v.node] = newTime;
-                }
-                if (newDist < distance[v.node]) {
                     distance[v.node] = newDist;
                 }
+                if (newTime == time[v.node]){
+                if (newDist < distance[v.node]) {
+                    distance[v.node] = newDist;
+                    time[v.node] = newTime;
+                }}
                 pq.add(new Node(v.node, distance[v.node], time[v.node]));
             }
         }
